@@ -1,0 +1,31 @@
+class Solution {
+    public List<Integer> eventualSafeNodes(int[][] g) {
+        int n = g.length;
+        List<List<Integer>> r = new ArrayList<>();
+        int[] d = new int[n];
+
+        for (int i = 0; i < n; i++)
+            r.add(new ArrayList<>());
+
+        for (int i = 0; i < n; i++) {
+            d[i] = g[i].length;
+            for (int v : g[i])
+                r.get(v).add(i);
+        }
+
+        Queue<Integer> q = new LinkedList<>();
+        for (int i = 0; i < n; i++)
+            if (d[i] == 0) q.add(i);
+
+        List<Integer> ans = new ArrayList<>();
+        while (!q.isEmpty()) {
+            int u = q.poll();
+            ans.add(u);
+            for (int v : r.get(u))
+                if (--d[v] == 0) q.add(v);
+        }
+
+        Collections.sort(ans);
+        return ans;
+    }
+}

@@ -1,0 +1,10 @@
+
+class Solution {
+    public int[] topKFrequent(int[] nums, int k) {
+        Map<Integer,Integer> m = new HashMap<>();
+        for(int n:nums) m.put(n,m.getOrDefault(n,0)+1);
+        return m.entrySet().stream()
+            .sorted((a,b)->b.getValue()-a.getValue())
+            .limit(k).mapToInt(Map.Entry::getKey).toArray();
+    }
+}

@@ -1,0 +1,22 @@
+
+import java.util.*;
+
+class LRUCache {
+    LinkedHashMap<Integer,Integer> m;
+    int cap;
+
+    public LRUCache(int capacity) {
+        cap = capacity;
+        m = new LinkedHashMap<>(capacity, 0.75f, true);
+    }
+
+    public int get(int key) {
+        return m.getOrDefault(key, -1);
+    }
+
+    public void put(int key, int value) {
+        m.put(key, value);
+        if(m.size() > cap)
+            m.remove(m.keySet().iterator().next());
+    }
+}

@@ -1,0 +1,18 @@
+
+import java.util.*;
+
+class Solution {
+    public String[] findRelativeRanks(int[] score) {
+        int[] a = score.clone();
+        Arrays.sort(a);
+        String[] ans = new String[score.length];
+        for(int i=0;i<score.length;i++) {
+            int r=0;
+            for(int j=0;j<a.length;j++)
+                if(a[j]==score[i]) r=a.length-j;
+            ans[i] = r==1 ? "Gold Medal" : r==2 ? "Silver Medal" :
+                     r==3 ? "Bronze Medal" : ""+r;
+        }
+        return ans;
+    }
+}
